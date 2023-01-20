@@ -75,15 +75,7 @@ if($e != $log_email){
 											<label class="control-label" for="country">Country</label>
 											<div class="controls">
 											  <select name="country" id="country">
-												<option value="Nepal" Selected>Nepal</option>
-												<option value="India">India</option>
-												<option value="China">China</option>
-												<option value="USA">USA</option>
-												<option value="Bangladesh">Bangladesh</option>
-												<option value="Bhutan">Bhutan</option>
-												<option value="Srilanka">Srilanka</option>
-												<option value="Pakistan">Pakistan</option>
-												<option value="Afghanistan">Afghanistan</option>
+												<option value="Nepal" Selected>Nepal</option>												
 											  </select> 
 											</div>			
 										  </div>

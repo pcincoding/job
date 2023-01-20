@@ -9,7 +9,7 @@
 					</div>	
 					  <div style="text-align:right;margin-right: 10px;">
 					  <button class="btn btn-primary" onclick="CloseApplicants()">
-						<span style="margin: 0;color: #fff;" class="fa fa-close"></span>
+						<span style="margin: 0;color: #000;" class="fa fa-close">Close</span>
 					  </button>
 					</div>
 				  </div>

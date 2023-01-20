@@ -1,7 +1,6 @@
 <?php
 include_once("_sys/check_login_status.php");
 if($user_ok == false){
-	header("location: bacsyd");
     exit();
 }
 mysqli_query($db_connection, "UPDATE seeker_profile SET last_checks_jobs=now() WHERE e_hash='$log_email'");
@@ -17,18 +16,49 @@ if($utype == "recruiter"){
 }
 ?><?php 
 $profile_stregth = 0;
-$sql_dp = "SELECT * FROM user_account WHERE e_hash='$log_email'";$query_dp = mysqli_query($db_connection, $sql_dp);
-while ($row = mysqli_fetch_array($query_dp, MYSQLI_ASSOC)) {$ps_avatar = $row["user_image"];}
-if($ps_avatar == NULL){$profile_stregth = $profile_stregth + 0;}else{$profile_stregth = $profile_stregth + 3;}
-$ps_seeker_bio = "";$sql_bio = "SELECT * FROM seeker_profile WHERE e_hash='$log_email'";$query_bio = mysqli_query($db_connection, $sql_bio);
-while ($row = mysqli_fetch_array($query_bio, MYSQLI_ASSOC)) {$ps_seeker_bio = $row["seeker_bio"];}
-if($ps_seeker_bio == " "){$profile_stregth = $profile_stregth + 0;}else if($ps_seeker_bio != " " && (strlen($ps_seeker_bio)) < 39 ){$profile_stregth = $profile_stregth + 4;}else{$profile_stregth = $profile_stregth + 10;}
-$sql_edu = "SELECT id FROM education_detail WHERE e_hash='$log_email'";$query_edu = mysqli_query($db_connection, $sql_edu);$ps_edu_num = mysqli_num_rows($query_edu);
-if($query_edu == true){$profile_stregth = $profile_stregth + ($ps_edu_num * 4);}
-$sql_xp = "SELECT id FROM experience_detail WHERE e_hash='$log_email'";$query_xp = mysqli_query($db_connection, $sql_xp);$ps_xp_num = mysqli_num_rows($query_xp);
-if($query_xp == true){$profile_stregth = $profile_stregth + ($ps_xp_num * 5);}
-$sql_skill = "SELECT id FROM seeker_skill_set WHERE e_hash='$log_email'";$query_skill = mysqli_query($db_connection, $sql_skill);$ps_skill_num = mysqli_num_rows($query_skill);
-if($query_skill == true && $ps_skill_num < 7){$profile_stregth = $profile_stregth + ($ps_skill_num * 3);}else if($ps_skill_num > 7){$profile_stregth = $profile_stregth + 18;}
+$sql_dp = "SELECT * FROM user_account WHERE e_hash='$log_email'";
+$query_dp = mysqli_query($db_connection, $sql_dp);
+while ($row = mysqli_fetch_array($query_dp, MYSQLI_ASSOC)) {
+	$ps_avatar = $row["user_image"];
+}
+if($ps_avatar == NULL){
+	$profile_stregth = $profile_stregth + 0;
+}else{
+	$profile_stregth = $profile_stregth + 3;
+}
+$ps_seeker_bio = "";
+$sql_bio = "SELECT * FROM seeker_profile WHERE e_hash='$log_email'";
+$query_bio = mysqli_query($db_connection, $sql_bio);
+while ($row = mysqli_fetch_array($query_bio, MYSQLI_ASSOC)) {
+	$ps_seeker_bio = $row["seeker_bio"];
+}
+if($ps_seeker_bio == " "){
+	$profile_stregth = $profile_stregth + 0;
+}else if($ps_seeker_bio != " " && (strlen($ps_seeker_bio)) < 39 ){
+	$profile_stregth = $profile_stregth + 4;
+}else{
+	$profile_stregth = $profile_stregth + 10;
+}
+$sql_edu = "SELECT id FROM education_detail WHERE e_hash='$log_email'";
+$query_edu = mysqli_query($db_connection, $sql_edu);
+$ps_edu_num = mysqli_num_rows($query_edu);
+if($query_edu == true){
+	$profile_stregth = $profile_stregth + ($ps_edu_num * 4);
+}
+$sql_xp = "SELECT id FROM experience_detail WHERE e_hash='$log_email'";
+$query_xp = mysqli_query($db_connection, $sql_xp);
+$ps_xp_num = mysqli_num_rows($query_xp);
+if($query_xp == true){
+	$profile_stregth = $profile_stregth + ($ps_xp_num * 5);
+}
+$sql_skill = "SELECT id FROM seeker_skill_set WHERE e_hash='$log_email'";
+$query_skill = mysqli_query($db_connection, $sql_skill);
+$ps_skill_num = mysqli_num_rows($query_skill);
+if($query_skill == true && $ps_skill_num < 7){
+	$profile_stregth = $profile_stregth + ($ps_skill_num * 3);
+}else if($ps_skill_num > 7){
+	$profile_stregth = $profile_stregth + 18;
+}
 mysqli_query($db_connection, "UPDATE seeker_profile SET profile_strength='$profile_stregth' WHERE e_hash='$log_email'");
 ?>
 <!DOCTYPE html>

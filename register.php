@@ -104,7 +104,7 @@ if(isset($_POST["eo"]) && isset($_POST["pwd"])){
 		}
 		$sql_note = "INSERT INTO notifications (note_type, e_hash, note, date_time) 
 										VALUES (
-												'a',
+												's',
 												'$eo_hash',
 												'Hello $fo. Thanks for joining TalentTaps. We hope you get excited when you consider the possibilities of landing your dream job. We can not wait for you to get started. You might want to start by:<br>- Tailoring your Profile <br> Your profile is a virtual representation of your physical CV. Make a good one.',
 												now())";
@@ -164,7 +164,7 @@ if(isset($_POST["r_eo"]) && isset($_POST["r_pwd"]) && isset($_POST["r_userrole"]
 		
 		$_note = "INSERT INTO notifications (note_type, e_hash, note, date_time) 
 										VALUES (
-												'a',
+												'r',
 												'$r_eo_hash',
 												'Hello $company_name. Thanks for joining TalantTaps. We hope you get excited when you consider the possibilities of landing the best employees. We can not wait for you to get started. You might want to start by:<br>- Posting a Job',
 												now())";
@@ -178,7 +178,7 @@ if(isset($_POST["r_eo"]) && isset($_POST["r_pwd"]) && isset($_POST["r_userrole"]
 		$customMailer = new CustomMailer();
         $subject = 'E-mail Activation Team From TalentTaps';
         $message = '<span style="font-size:16px;">Hey '.$company_name.',<br /><br />Looks like this was the right email. :)<br /><br />';
-		$message .= 'Next, please confirm your email address and activate your account by either clicking on the link below or using your activation string.<br /><br /><br />';
+		$message .= 'Please confirm your email address and activate your account by either clicking on the link below or using your activation string.<br /><br /><br />';
         $message .= 'http://localhost/job/activation.php?e_hash='.$r_eo_hash.'';
 		$message .= '<br /><br /><span style="font-size:16px;"><b>TalentTaps Activation Team</b></span></body></html>';
 

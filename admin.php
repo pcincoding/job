@@ -25,6 +25,8 @@ if (isset($_POST['action']) && $_POST['action'] == "delete_user") {
 	mysqli_query($db_connection, "DELETE FROM seeker_skill_set WHERE e_hash='$u'");
 	mysqli_query($db_connection, "DELETE FROM seeker_profile WHERE e_hash='$u'");
 	mysqli_query($db_connection, "DELETE FROM seeker_bookmarks WHERE e_hash='$u'");
+	//mysqli_query($db_connection, "DELETE FROM job_post_skill_set WHERE e_hash='$u'");
+	mysqli_query($db_connection, "DELETE FROM feedback WHERE e_hash='$u'");
 	mysqli_query($db_connection, "DELETE FROM notifications WHERE e_hash='$u'");
 	mysqli_query($db_connection, "DELETE FROM job_post_activity WHERE e_hash='$u'");
 	mysqli_query($db_connection, "DELETE FROM job_post WHERE company_id='$u'");
