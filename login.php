@@ -139,7 +139,7 @@ function signin(){
 					status.innerHTML = '<h5><div class="alert">Wrong email or password</div></h5>';
 					_("showloader").style.display = "none";
 				} else {
-					window.location= "login.php";
+					window.location= "sync.php";
 				}
 	        }
         }

@@ -26,7 +26,7 @@ if ($e != $log_email) {
 	<?php include_once("_ext/dashboard_navbar.php"); ?>
 	<?php include_once("_ext/dashboard_dialog-searchlayer.php"); ?>
 	<?php include_once("_parse/_all_note_check.php"); ?>
-	<div class="everything-everything"> <!--style="filter:blur(3px)" -->
+	<div class="everything-everything">
 		<div class="subnavbar">
 			<div class="subnavbar-inner">
 				<div class="container">

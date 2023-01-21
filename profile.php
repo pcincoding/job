@@ -18,15 +18,27 @@ if ($old_dp != "") {
 	}
 }
 mysqli_query($db_connection, "UPDATE user_account SET avatartemp=NULL WHERE e_hash='$log_email'");
-$sq = "SELECT start_date,date_date FROM experience_detail WHERE is_current_job='1'";
+$sq = "SELECT start_date,date_date,postdate FROM experience_detail WHERE e_hash='$log_email'";
 $q = mysqli_query($db_connection, $sq);
-while ($row = mysqli_fetch_array($q, MYSQLI_ASSOC)) {
-	$start_date = strftime("%b %Y", strtotime($row["start_date"]));
-	$date_date = strftime("%b %Y", strtotime($row["date_date"]));
-	$diff = abs(strtotime($date_date) - strtotime($start_date));
-	$date_year_diff = floor($diff / (365 * 60 * 60 * 24));
+$date_year_diff = "";
+if($row = mysqli_fetch_assoc($q)>0){
+	while ($row = mysqli_fetch_array($q, MYSQLI_ASSOC)) {
+		$start_date = strftime("%b %Y", strtotime($row["start_date"]));
+		$date_date = strftime("%b %Y", strtotime($row["date_date"]));
+		$diff = abs(strtotime($date_date) - strtotime($start_date));
+		$date_year_diff = floor($diff / (365 * 60 * 60 * 24));
+		$jobapply = $row['postdate'];
+	}
+}else{
+	$date_year_diff = 0;
+	}
+if($date_date-$jobapply>=1){
+	$query2 = mysqli_query($db_connection, "UPDATE experience_detail SET date_date=now(),date_year_diff= '$date_year_diff', is_current_job='1'  WHERE e_hash='$log_email'");
 }
-$query2 = mysqli_query($db_connection, "UPDATE experience_detail SET date_date=now(),date_year_diff='$date_year_diff' WHERE is_current_job='1'");
+else{
+	$query2 = mysqli_query($db_connection, "UPDATE experience_detail SET date_date=now(),date_year_diff= '$date_year_diff' WHERE e_hash='$log_email'");
+}
+
 $addBtn = 'style="display:none;"';
 if ($e == $log_email) {
 	$addBtn = 'style="display:;"';

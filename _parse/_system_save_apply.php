@@ -149,6 +149,8 @@ if (isset($_POST['type2']) && isset($_POST['user2'])){
 			$query = mysqli_query($db_connection, $sql);
 			$sql_ = "UPDATE seeker_profile SET last_job_apply_date=now() WHERE e_hash='$user'";
 			$query_ = mysqli_query($db_connection, $sql_);
+			$sql_ = "UPDATE notifications SET job_post_id= $jid, did_read= '1' WHERE e_hash='$user'";
+			$query_ = mysqli_query($db_connection, $sql_);
 			mysqli_close($db_connection);
 	        echo "apply_ok";
 	        exit();
@@ -160,6 +162,8 @@ if (isset($_POST['type2']) && isset($_POST['user2'])){
 	        exit();
 	    } else {
 			$sql = "DELETE FROM job_post_activity WHERE e_hash='$user' AND job_post_id='$jid'";
+			$query = mysqli_query($db_connection, $sql);
+			$sql = "UPDATE notifications SET job_post_id= 0 WHERE e_hash='$user'";
 			$query = mysqli_query($db_connection, $sql);
 			mysqli_close($db_connection);
 	        echo "unapply_ok";

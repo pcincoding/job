@@ -1,9 +1,7 @@
 <?php
 include_once("../_sys/check_login_status.php");
 include_once("../phpmailer.php");
-if($user_ok != true || $log_email == "") {
-	exit();
-}
+
 ?><?php
 if (isset($_POST['action']) && $_POST['action'] == "add_edu"){
 	if(!isset($_POST['sch']) || $_POST['sch'] == ""){
@@ -21,7 +19,7 @@ if (isset($_POST['action']) && $_POST['action'] == "add_edu"){
 		echo "add_failed";
 		exit();
 	}else{
-		$sql_edu = "SELECT id FROM education_detail WHERE e_hash='$log_email'";
+		$sql_edu = "SELECT id FROM education_detail WHERE e_hash= '$log_email'";
 		$query_edu = mysqli_query($db_connection, $sql_edu);
 		$ps_edu_num = mysqli_num_rows($query_edu);
 		if($ps_edu_num > 5){
@@ -225,6 +223,8 @@ if (isset($_POST['action']) && $_POST['action'] == "add_req"){
 		}
 		$query1 = mysqli_query($db_connection, "UPDATE job_post SET qualification='$degree',shortlist_limit='$limit' WHERE id='$jid' LIMIT 1");
 		echo $jid;
+		$sql1 = "UPDATE notifications set job_post_id = $jid where e_hash ='$log_email'";
+		$query2 = mysqli_query($db_connection, $sql1);
 		exit();
 	}
 }

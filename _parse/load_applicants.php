@@ -5,7 +5,7 @@ if($user_ok != true || $log_email == "") {
 }
 ?><?php
 if (isset($_GET['jid'])){
-	$jid = preg_replace('#[^0-9]#', '', $_GET['jid']);
+	$jid = $_GET['jid'];
 } else {
 	exit();
 }
@@ -20,9 +20,9 @@ $sql_ = "SELECT shortlist_limit FROM job_post WHERE id='$jid'";
 $query_ = mysqli_query($db_connection, $sql_);
 $row_ = mysqli_fetch_row($query_);
 $shortlist_limit = $row_[0];
-$limit_num = ($shortlist_limit/100)*$jobsCount;
+$limit_num = floor(($shortlist_limit/100)*$jobsCount);
 
-$sql0 = "SELECT * FROM job_post_activity WHERE job_post_id='$jid' ORDER BY seeker_result DESC LIMIT $limit_num";
+$sql0 = "SELECT * FROM job_post_activity WHERE job_post_id='$jid' ORDER BY seeker_result DESC LiMIT $limit_num";
 $query0 = mysqli_query($db_connection, $sql0);
 while ($row = mysqli_fetch_array($query0, MYSQLI_ASSOC)) {
 	$job_post_id = $row["job_post_id"];

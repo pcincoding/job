@@ -75,11 +75,11 @@ mysqli_query($db_connection, "UPDATE seeker_profile SET profile_strength='$profi
 <?php include_once("_ext/dashboard_navbar.php");?>
 <?php include_once("_ext/dashboard_dialog-searchlayer.php");?>
 <?php include_once("_parse/_all_note_check.php");?>
-  <div class="everything-everything"> <!--style="filter:blur(3px)" -->
+  <div class="everything-everything">
 	<div class="subnavbar">
 	  <div class="subnavbar-inner">
 		<div class="container">
-		  <ul class="mainnav">  <!--javascript:void(0);" onclick="owlphinhome()-->
+		  <ul class="mainnav"> 
 			<li><a href="index.php"><i class="fa fa-dashboard"></i><span>Dashboard</span> </a> </li>
 			<li <?php echo $usershow;?>><a href="javascript:void(0);" onclick="profile('<?php echo $log_email;?>')"><i class="fa fa-user"></i><span>Profile</span> </a> </li>
 			<li><a href="javascript:void(0);" onclick="notifications('<?php echo $log_email;?>')"><i class="fa fa-bell"></i><span>Notifications</span> </a><span id="quick_note_num"><?php echo $note_label;?></span> </li>
@@ -103,7 +103,7 @@ mysqli_query($db_connection, "UPDATE seeker_profile SET profile_strength='$profi
 				<div class="text-center mobile-no-show" >
 				<form class="navbar-search text-center mobile-no-show" style="margin-top: 0px;margin-left: 35px;">
 				  <input type="text" name="qy" id="qy" onKeyUp="fy(this.value)" onBlur="hideLiveJobs(this)" class="span11 text-center" 
-				  style="background: linear-gradient(to right, #fff, #c1c1c1 25%, #c1c1c1 75%, #fff 100%);font-size: 16px;border: 0px;" placeholder="Search job title or qualification or job type or keywords">
+				  style="background: linear-gradient(to right, pink, skyblue 25%, yellow 75%, pink 100%);font-size: 16px;border: 0px;" placeholder="Search job title or qualification or job type or keywords">
 				</form>
 				</div>
 				<div class="widget-content">

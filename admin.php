@@ -1,9 +1,5 @@
 <?php
 include_once("_sys/check_login_status.php");
-/*if($user_ok == true){
-header("location: sync&".$_SESSION["user_hash"]);
-exit();
-}*/
 ?>
 <?php
 if (isset($_POST['action']) && $_POST['action'] == "delete_user") {
@@ -14,8 +10,13 @@ if (isset($_POST['action']) && $_POST['action'] == "delete_user") {
 	}
 	$userid = $_POST['userid'];
 	$query = mysqli_query($db_connection, "SELECT e_hash FROM user_account WHERE e_hash='$userid' LIMIT 1");
+	$query0 = mysqli_query($db_connection, "SELECT id FROM job_post WHERE company_id='$userid' LIMIT 1");
 	while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 		$u = $row["e_hash"];
+	}
+	$id = "";
+	while($row0 = mysqli_fetch_assoc($query0)){
+		$id = $row0['id'];
 	}
 	$userFolder = "_USER/$u";
 	if (is_dir($userFolder)) {
@@ -25,7 +26,7 @@ if (isset($_POST['action']) && $_POST['action'] == "delete_user") {
 	mysqli_query($db_connection, "DELETE FROM seeker_skill_set WHERE e_hash='$u'");
 	mysqli_query($db_connection, "DELETE FROM seeker_profile WHERE e_hash='$u'");
 	mysqli_query($db_connection, "DELETE FROM seeker_bookmarks WHERE e_hash='$u'");
-	//mysqli_query($db_connection, "DELETE FROM job_post_skill_set WHERE e_hash='$u'");
+	mysqli_query($db_connection, "DELETE FROM job_post_skill_set WHERE job_post_id='$id'");
 	mysqli_query($db_connection, "DELETE FROM feedback WHERE e_hash='$u'");
 	mysqli_query($db_connection, "DELETE FROM notifications WHERE e_hash='$u'");
 	mysqli_query($db_connection, "DELETE FROM job_post_activity WHERE e_hash='$u'");
