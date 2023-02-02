@@ -4,38 +4,38 @@ if($user_ok ==true){
 	header("location:sync&".$_SESSION['user_hash']);
 	exit();
 }
-
+?><?php
 if(isset($_POST["email"])){
 	$email = $_POST['email'];
 	$p = $_POST['p'];
-    $ip = preg_replace('#[^0-9.]#', '', getenv('REMOTE_ADDR'));
+    $ip = "127.0.0.1";
+	$sql = "SELECT id, email,e_hash, password FROM user_account WHERE email ='$email' AND activated='1' LIMIT 1";
+	$query = mysqli_query($db_connection, $sql);
+	$row = mysqli_fetch_row($query);
+	$db_id = $row[0];
+	$db_email = $row[1];
+	$db_ehash = $row[2];
+    $db_pass_str = $row[3];
 
 	if($email == "" || $p == ""){
 		echo "Please Enter Email and Password";
-	} 
-	else {
-		$sql = "SELECT id, e_hash, password FROM user_account WHERE email ='$email' AND activated='1' LIMIT 1";
-        $query = mysqli_query($db_connection, $sql);
-        $row = mysqli_fetch_row($query);
-		$db_id = $row[0];
-		$db_ehash = $row[1];
-        $db_pass_str = $row[2];
-		if(md5($p) != $db_pass_str){
+	} else {
+		if ((md5($p) != $db_pass_str) || ($email != $db_email)){
 			echo "login_failed";
-            
-		} 
-		else {
+
+		} else {
 			$_SESSION['userid'] = $db_id;
 			$_SESSION['user_hash'] = $db_ehash;
 			$_SESSION['password'] = $db_pass_str;
-			setcookie("id", $db_id, strtotime( '+30 days' ), "/", "", TRUE);
-			setcookie("e_hash", $db_ehash, strtotime( '+30 days' ), "/", "", TRUE);
-    		setcookie("pass", $db_pass_str, strtotime( '+30 days' ), "/", "", TRUE);
+			setcookie("id", $db_id, strtotime('+30 days'), "/", "", TRUE);
+			setcookie("e_hash", $db_ehash, strtotime('+30 days'), "/", "", TRUE);
+			setcookie("pass", $db_pass_str, strtotime('+30 days'), "/", "", TRUE);
 
 			$sql = "UPDATE user_account SET ip='$ip', last_login_date=now() WHERE e_hash='$db_ehash' LIMIT 1";
-            $query = mysqli_query($db_connection, $sql);
+			$query = mysqli_query($db_connection, $sql);
 		}
 	}
+	
 	exit();	
 }
 ?>
@@ -46,49 +46,33 @@ if(isset($_POST["email"])){
 <title>Sign in to TalentTaps</title>
 <?php include_once("_ext/default_head.php");?>
 <link href="_css/p.login-register-reset.css" rel="stylesheet">
+<link rel="stylesheet" href="Font/css/all.css">
 </head>
 <body class="login-background">
 <?php include_once("_ext/pageloader.php");?>
 <?php include_once("_ext/pageloader-starter.php");?>
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container"> 
-	  <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-	    <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-	  </a>
-	  <a class="brand" href="index.php">
-	    <img src="_img/owlphin_log.png" style="height:30px;" />
-		<span></span>
-      </a>
-      <div class="nav-collapse">
-		<form class="navbar-search" role="form" method="post" onSubmit="return false;">
-		  <ul class="nav pull-right mobile-no-show">
-		   <li><button class="btn btn-inverse" onclick="register()">No account? Join now</button></li>
-	      </ul>
-	    </form>
-      </div>
-    </div>
-  </div> 
-</div>
 <div class="account-container">
   <div class="content clearfix">
     <div id="showloader" class="div-loader-cover"><div class="spinner"></div></div>
 	<form role="form" method="post" onSubmit="return false;">
 	  <div class="register-logo">
 		<span><img src="_img/owlphin_log.png" style="width:55px;" /></span>
-		<h2>Sign in</h2>	
+		<h2 style="color: #3c00a0;">Sign In</h2>	
 		<span id="status"></span>
 	  </div>
 	  <div class="login-fields">
 		<div class="field">
+		<i class="fa-solid fa-envelope"></i>
 		  <input type="text" id="email" name="email" placeholder="Email" class="login email-field" onfocus="emptyElement('status')" onkeyup="restrict('email')" />
 		</div>
 		<div class="field">
+		<i class="fa-solid fa-lock"></i>
 		  <input type="password" id="password" name="password" placeholder="Password" onfocus="emptyElement('status')" class="login password-field"/>
+		  <i class="fa-solid fa-eye-slash" id="show-password"></i>
 		</div>
 	  </div>
 	  <div class="login-actions">			
-		<button class="button btn btn-inverse btn-large" onclick="signin()">Sign In</button>
+		<button class="button btn btn-large" onclick="signin()">Sign In</button>
 	  </div>
 	  <div class="login-extra" style="margin-bottom: 0;">
 		<a  href="javascript:void(0)" onclick="resetpass()">Forgot password?</a> 
@@ -102,6 +86,22 @@ if(isset($_POST["email"])){
 <div class="footer mobile-no-show" style="bottom: 0;position: fixed;right: 0;left: 0;"><?php include_once("_ext/footer.php");?></div>
 <?php include_once("_ext/default_js.php");?>
 <script type="text/javascript">
+
+var eye = document.getElementById('show-password');
+var password = document.getElementById("password");
+eye.onclick = function(){
+	if(password.type=="password"){
+		password.type="text";
+		eye.classList.remove("fa-eye-slash");
+		eye.classList.add("fa-eye");
+	}
+	else{
+		password.type= "password";
+		eye.classList.remove("fa-eye");
+		eye.classList.add("fa-eye-slash");
+	}
+}
+
 function restrict(elem){
 	var tf = _(elem);
 	var rx = new RegExp;
@@ -120,16 +120,16 @@ function signin(){
 	var email = _("email").value;
 	var p = _("password").value;
 	var status = _("status");
-	//var validmail = /^[a-zA-Z0-9._]{3,}@[a-z]{4,}[.]{1}[a-z.]{2,6}$/;
+	var validmail = /^[a-zA-Z0-9._]{3,}@[a-z]{4,}[.]{1}[a-z.]{2,6}$/;
 	if(email == ""){
-		status.innerHTML = '<h5><div class="alert">Please fill out all of the form data</div></h5>';
+		status.innerHTML = '<h5><div class="alert">Please fill out Email</div></h5>';
 		_("email").style.borderColor = "red";
 	}else if(p == ""){
-		status.innerHTML = '<h5><div class="alert">Please fill out all of the form data</div></h5>';
+		status.innerHTML = '<h5><div class="alert">Please fill out Password</div></h5>';
 		_("password").style.borderColor = "red";
-	}/*else if(!validmail.test(email)){
+	}else if(!validmail.test(email)){
 		status.innerHTML = '<h5><div class="alert">Please enter a valid email Address</div></h5>';	
-	}*/
+	}
 	else{
 		_("showloader").style.display = "block";
 		var ajax = ajaxObj("POST", "login.php");
@@ -139,7 +139,7 @@ function signin(){
 					status.innerHTML = '<h5><div class="alert">Wrong email or password</div></h5>';
 					_("showloader").style.display = "none";
 				} else {
-					window.location= "sync.php";
+					window.location= "login.php";
 				}
 	        }
         }
