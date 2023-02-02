@@ -18,7 +18,7 @@ function evalLoggedUser($db_connection,$id,$e,$p){
 if(isset($_SESSION["userid"]) && isset($_SESSION["user_hash"]) && isset($_SESSION["password"])) {
 	$log_id = preg_replace('#[^0-9]#', '', $_SESSION['userid']);
 	$log_email = $_SESSION['user_hash'];
-	$log_password = preg_replace('#[^a-z0-9]#i', '', $_SESSION['password']);
+	$log_password = $_SESSION['password'];
 	
 	$user_ok = evalLoggedUser($db_connection,$log_id,$log_email,$log_password);
 	

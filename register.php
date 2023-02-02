@@ -141,7 +141,7 @@ if(isset($_POST["r_eo"]) && isset($_POST["r_pwd"]) && isset($_POST["r_userrole"]
 	$_SESSION['comp_contact'] = $comp_contact = $_POST['comp_contact'];
 	
 	$ip = preg_replace('#[^0-9.]#', '', getenv('REMOTE_ADDR'));
-	$r_eo_hash =md5($r_eo);  											//md5
+	$r_eo_hash =md5($r_eo); 
 	
 	$sql = "SELECT id FROM user_account WHERE email='$r_eo'";
     $query = mysqli_query($db_connection, $sql); 
@@ -245,30 +245,12 @@ if(isset($_POST['action']) && $_POST['action'] == "activate_account"){
 <title>Join Owlphin now</title>
 <?php include_once("_ext/default_head.php");?>
 <link href="_css/p.login-register-reset.css" rel="stylesheet">
+<link rel="stylesheet" href="Font/css/all.css">
 </head>
 <body class="register-background">
 <?php include_once("_ext/pageloader.php");?>
 <?php include_once("_ext/pageloader-starter.php");?>
-<div class="navbar navbar-fixed-top">
-	<div class="navbar-inner">
-		<div class="container"> 
-		  <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-			<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-		  </a>
-		  <a class="brand"  href="index.php">
-			<img src="_img/owlphin_log.png" style="height:30px;" />
-			<span></span>
-		  </a>
-		  <div class="nav-collapse" id="hideloginbtn">
-			<form class="navbar-search" action="login">
-			  <ul class="nav pull-right mobile-no-show">
-			    <li><button class="btn btn-inverse" onclick="login()">Already have an account? Sign in</button></li>
-			  </ul>
-			</form>
-		  </div>
-		</div>
-	</div> 
-</div>
+
 <div id="registerform" style="display:;">
 	<div class="account-container register">
 	  <div id="showloader1" class="div-loader-cover"><div class="spinner"></div></div>
@@ -276,24 +258,26 @@ if(isset($_POST['action']) && $_POST['action'] == "activate_account"){
 		<form role="form" method="post" onSubmit="return false;">
 		  <div class="register-logo">
 			<span><img src="_img/owlphin_log.png" style="width:55px;" /></span>
-			<h2>Let's get started</h2>	
-			<span id="status1"><h5 style="font-size: 14px;font-weight: initial;color: #747171;">Over 10,000 people have landed jobs here</h5></span>
+			<h2 style="color:#3c00a0;">Sign Up</h2>	
+			<span id="status1"><h5 style="font-size: 14px;font-weight: initial;color: green">Over 10,000 people have landed jobs here</h5></span>
 		  </div>		
 		  <div class="login-fields">
 			<div class="field" style="margin-bottom: 0em;">
+			<i class="fa-solid fa-envelope"></i>
 			  <input type="text" id="email" name="email" placeholder="Email address" onblur="emailValidation()" onkeyup="restrict('email')" onfocus="emptyElement('status1')" />
 			</div>
-			<div class="login-extra" style="margin-bottom: 0;margin-top: 0;">
-			  <p class="text-center" style="font-size:10px;">Please enter an active email address</p>				
-		    </div>
 			<div class="field">
+			<i class="fa-solid fa-lock"></i>
 			  <input type="password" id="pass1" name="pass1" placeholder="Password" onfocus="emptyElement('status1')" maxlength="40" onpaste="return false" />
+			  <i class="fa-solid fa-eye-slash" id="show1"></i>
 			</div>
 			<div class="field">
+			<i class="fa-solid fa-lock"></i>
 			  <input type="password" id="pass2" name="pass2" placeholder="Confirm Password" onfocus="emptyElement('status1')" maxlength="40" onpaste="return false" />
+			  <i class="fa-solid fa-eye-slash" id="show2"></i>
 			</div>	
 			<div class="login-actions">	
-			  <button style="margin-top:10px;" class="button btn btn-inverse btn-large" onclick="nextone()">Join now</button>
+			  <button style="margin:10px 0" class="button btn btn-large" onclick="nextone()">Join now</button>
 			</div>
 			<div class="login-extra" style="margin-top: 4em;">
 			  <a href="javascript:void(0)" onclick="login()">Already have an account? Sign in</a> 
@@ -307,6 +291,37 @@ if(isset($_POST['action']) && $_POST['action'] == "activate_account"){
 <div class="footer mobile-no-show" style="bottom: 0;position: fixed;right: 0;left: 0;"><?php include_once("_ext/footer.php");?></div>
 <?php include_once("_ext/default_js.php");?>
 <script type="text/javascript">
+
+var eye1 = document.getElementById('show1');
+var eye2 = document.getElementById('show2');
+var pass1 = document.getElementById("pass1");
+var pass2 = document.getElementById("pass2");
+eye1.onclick = function(){
+	if(pass1.type=="password"){
+		pass1.type="text";
+		eye1.classList.remove("fa-eye-slash");
+		eye1.classList.add("fa-eye");
+	}
+	else{
+		pass1.type= "password";
+		eye1.classList.remove("fa-eye");
+		eye1.classList.add("fa-eye-slash");
+	}
+}
+eye2.onclick = function(){
+	if(pass2.type=="password"){
+		pass2.type="text";
+		eye2.classList.remove("fa-eye-slash");
+		eye2.classList.add("fa-eye");
+	}
+	else{
+		pass2.type= "password";
+		eye2.classList.remove("fa-eye");
+		eye2.classList.add("fa-eye-slash");
+	}
+}
+
+
 function restrict(elem){
 	var tf = _(elem);
 	var rx = new RegExp;
@@ -342,7 +357,7 @@ function toggleElement(x){
   }
 }
 function validateEmail(email) {
-  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  var re = /^[a-zA-Z0-9._]{3,}@[a-z]{4,}[.]{1}[a-z.]{2,6}$/;      ///^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 }
 function emailValidation() {
@@ -362,13 +377,14 @@ function nextone(){
 	}else if(!e.replace(/\s/g, '').length){
 		status1.innerHTML = '<h5><div class="alert">Please fill out all of the form data</div></h5>';
 	}else if(!validateEmail(e)){
-		status1.innerHTML = '<h5><div class="alert">Your email is invalid</div></h5>';
+		status1.innerHTML = '<h5><div class="alert">Your email is invalid(shouldnot contain symbols like -,%)</div></h5>';
 	}else if(p1 != p2){
 		status1.innerHTML = '<h5><div class="alert">Your passwords do not match</div></h5>';;
 	}else {
 		_("showloader1").style.display = "block";
 		var ajax = ajaxObj("POST", "register.php");
         ajax.onreadystatechange = function() {
+			alert(ajaxReturn(ajax));
 	        if(ajaxReturn(ajax) == true) {
 				var ustring = ajax.responseText.split("|||");
 				for (var i = 0; i < ustring.length; i++){
