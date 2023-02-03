@@ -9,21 +9,20 @@ if(isset($_POST["email"])){
 	$email = $_POST['email'];
 	$p = $_POST['p'];
     $ip = "127.0.0.1";
-	$sql = "SELECT id, email,e_hash, password FROM user_account WHERE email ='$email' AND activated='1' LIMIT 1";
-	$query = mysqli_query($db_connection, $sql);
-	$row = mysqli_fetch_row($query);
-	$db_id = $row[0];
-	$db_email = $row[1];
-	$db_ehash = $row[2];
-    $db_pass_str = $row[3];
+	
 
 	if($email == "" || $p == ""){
 		echo "Please Enter Email and Password";
 	} else {
-		if ((md5($p) != $db_pass_str) || ($email != $db_email)){
-			echo "login_failed";
-
-		} else {
+		$sql = "SELECT id, email,e_hash, password FROM user_account WHERE email ='$email' AND activated='1' LIMIT 1";
+		$query = mysqli_query($db_connection, $sql);
+		$rownum = mysqli_num_rows($query);
+		if($rownum>0){
+			$row = mysqli_fetch_row($query);
+			$db_id = $row[0];
+			$db_email = $row[1];
+			$db_ehash = $row[2];
+    		$db_pass_str = $row[3];
 			$_SESSION['userid'] = $db_id;
 			$_SESSION['user_hash'] = $db_ehash;
 			$_SESSION['password'] = $db_pass_str;
@@ -33,6 +32,9 @@ if(isset($_POST["email"])){
 
 			$sql = "UPDATE user_account SET ip='$ip', last_login_date=now() WHERE e_hash='$db_ehash' LIMIT 1";
 			$query = mysqli_query($db_connection, $sql);
+		}
+		else{
+			echo "login_failed";
 		}
 	}
 	
@@ -54,7 +56,7 @@ if(isset($_POST["email"])){
 <div class="account-container">
   <div class="content clearfix">
     <div id="showloader" class="div-loader-cover"><div class="spinner"></div></div>
-	<form role="form" method="post" onSubmit="return false;">
+	<form role="form" method="post" onsubmit="return false;">
 	  <div class="register-logo">
 		<span><img src="_img/owlphin_log.png" style="width:55px;" /></span>
 		<h2 style="color: #3c00a0;">Sign In</h2>	
@@ -135,11 +137,12 @@ function signin(){
 		var ajax = ajaxObj("POST", "login.php");
         ajax.onreadystatechange = function() {
 	        if(ajaxReturn(ajax) == true) {
-	            if(ajax.responseText == "login_failed"){
+	            if(ajax.responseText == "login_failed" || ajax.responseText == ""){
 					status.innerHTML = '<h5><div class="alert">Wrong email or password</div></h5>';
 					_("showloader").style.display = "none";
-				} else {
-					window.location= "login.php";
+				}
+				else{
+					location = "login.php";
 				}
 	        }
         }

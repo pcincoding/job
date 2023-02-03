@@ -1,10 +1,6 @@
 <?php 
 include_once("_sys/check_login_status.php");
 include_once("./phpmailer.php");
-/*if($user_ok == true){
-	header("location: sync&".$_SESSION["user_hash"]);
-    exit();
-}*/
 ?><?php
 if(isset($_POST["e"])){	
 	$_SESSION['e'] = $email = mysqli_real_escape_string($db_connection, $_POST['e']);
@@ -17,7 +13,7 @@ if(isset($_POST["e"])){
         exit();
 	} else {
 		$usertype = $row['user_type'];	
-		$eo_hash = md5($email);					//md5
+		$eo_hash = md5($email);			
 		$customMailer = new CustomMailer();
 
 
@@ -27,8 +23,6 @@ if(isset($_POST["e"])){
         $message .= 'You can go ahead and reset your password by clicking the link before.</span><br /><br />';
         $message .= 'http://localhost/job/reset.php?e_hash='.$eo_hash.'';
 		$message .= '<br /><br /><span style="font-size:16px;"><b>TalentTaps Recovery Team</b></span></body></html>';
-		// $headers .= "MIME-Version: 1.0\n";
-		// $headers .= "Content-type: text/html; charset=iso-8859-1\n";
 
 		$customMailer->sendMail($email, $subject, $message);					 
 		
@@ -55,7 +49,7 @@ if(isset($_POST["e"])){
 	  <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 	    <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 	  </a>
-	  <a class="brand" href="javascript:void(0)" onclick="owlphinhome()">
+	  <a class="brand" href="index.php">
 	    <img src="_img/owlphin_log.png" style="height:30px;" />
 		<span></span>
       </a>

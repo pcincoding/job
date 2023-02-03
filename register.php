@@ -320,8 +320,6 @@ eye2.onclick = function(){
 		eye2.classList.add("fa-eye-slash");
 	}
 }
-
-
 function restrict(elem){
 	var tf = _(elem);
 	var rx = new RegExp;
@@ -384,7 +382,6 @@ function nextone(){
 		_("showloader1").style.display = "block";
 		var ajax = ajaxObj("POST", "register.php");
         ajax.onreadystatechange = function() {
-			alert(ajaxReturn(ajax));
 	        if(ajaxReturn(ajax) == true) {
 				var ustring = ajax.responseText.split("|||");
 				for (var i = 0; i < ustring.length; i++){
@@ -397,7 +394,7 @@ function nextone(){
 					_("showloader1").style.display = "none";
 					status1.innerHTML = '<h5><div class="alert">'+ajax.responseText+'</div></h5>';
 				} else {
-					_("hideloginbtn").innerHTML = '<ul class="nav pull-right"><li><button class="btn btn-inverse" onclick="register()">Cancel</button></li></ul>';
+					//_("hideloginbtn").innerHTML = '<ul class="nav pull-right"><li><button class="btn btn-inverse" onclick="register()">Cancel</button></li></ul>';
 					window.scrollTo(0,0);	
 					_("registerform").innerHTML = '	<div class="account-container register">'+
 												'<div id="showloader2" class="div-loader-cover"><div class="spinner"></div></div>'+
@@ -409,7 +406,7 @@ function nextone(){
 												'	  <span id="status2"></span>'+
 												'   </div>'+		
 												'<div class="login-fields">'+
-												'  <div class="field">'+
+												'  <div class="fields">'+
 												'	  <input type="radio" name="user_role" checked id="none" value="none" style="visibility:hidden;">'+
 												'	  <label class="rcontainer">Sign up as a Job Seeker'+
 												'		<input type="radio" name="user_role" id="seeker" value="seeker" onfocus="emptyElement(\'status2\')">'+
@@ -430,6 +427,7 @@ function nextone(){
       ajax.send("e="+e+"&p1="+encodeURIComponent(p1));
 	}
 }
+
 function nexttwo(email,pass){
 	var role = document.querySelector('input[name = "user_role"]:checked').value;
 	var status2 = _("status2");
@@ -465,20 +463,20 @@ function nexttwo(email,pass){
 														'<span id="status3"></span>'+
 													  '</div>'+			  
 													  '<div class="login-fields">'+
-														'<div class="field">'+
+														'<div class="fields">'+
 														 ' <input type="text" id="fname" name="fname" placeholder="Firstname" onkeyup="restrict(\'fname\')" onfocus="emptyElement(\'status3\')" />'+
 														'</div>'+
-														'<div class="field">'+
+														'<div class="fields">'+
 														 ' <input type="text" id="lname" name="lname" placeholder="Lastname" onkeyup="restrict(\'lname\')" onfocus="emptyElement(\'status3\')" />'+
 														'</div>'+
-														'<div class="field">'+
+														'<div class="fields">'+
 														 ' <select style="border:1px solid #686868;" name="gender" id="gender" onfocus="emptyElement(\'status3\')">'+
 															'<option Selected disabled>Gender:</option>'+
 															'<option value="m">Male</option>'+
 															'<option value="f">Female</option>'+
 														  '</select>'+
 														'</div>'+
-														'<div class="field">'+
+														'<div class="fields">'+
 														 ' <label class="text-center" for="dob">Date of Birth:</label>'+
 														  '<input type="date" id="dob" max="2001-01" name="dob" placeholder="Date of Birth:" onfocus="emptyElement(\'status3\')" required />'+
 														'</div>'+
@@ -498,7 +496,7 @@ function nexttwo(email,pass){
 															'<span id="status6"></span>'+
 														 ' </div>'+			  
 														  '<div class="login-fields">'+
-															'<div class="field">'+
+															'<div class="fields">'+
 															 ' <input class="max" type="text" id="company_name" name="company_name" placeholder="Company name" onfocus="emptyElement(\'status6\')" />'+
 															'</div>'+
 															'<div class="field-flex">'+
