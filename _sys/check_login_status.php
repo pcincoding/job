@@ -31,9 +31,11 @@ if(isset($_SESSION["userid"]) && isset($_SESSION["user_hash"]) && isset($_SESSIO
 	$log_password = $_SESSION['password'];
 	
 	$user_ok = evalLoggedUser($db_connection,$log_id,$log_email,$log_password);
-	if($user_ok == true){
-		$sql_log = "UPDATE user_account SET last_login_date=now(), is_active='Y' WHERE id='$log_id'";
-        $query = mysqli_query($db_connection, $sql_log);
-	}
+	
+}
+
+if($user_ok == true){
+	$sql_log = "UPDATE user_account SET last_login_date=now(), is_active='Y' WHERE id='$log_id'";
+	$query = mysqli_query($db_connection, $sql_log);
 }
 ?>

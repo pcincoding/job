@@ -1,13 +1,13 @@
 <?php
 include_once("_sys/check_login_status.php");
 if ($user_ok == false) {
-	header("location: bacsyd");
+	header("location: bacsyd.php");
 	exit();
 }
 ?>
 <?php
 include_once("_ext/dashboard_ulog.php");
-$sql = "SELECT avatartemp FROM user_account WHERE e_hash='$log_email'";
+$sql = "SELECT avatartemp FROM user_account WHERE e_hash= '$log_email'";
 $query = mysqli_query($db_connection, $sql);
 $row = mysqli_fetch_row($query);
 $old_dp = $row[0];
@@ -17,22 +17,27 @@ if ($old_dp != "") {
 		unlink($picurl);
 	}
 }
-mysqli_query($db_connection, "UPDATE user_account SET avatartemp=NULL WHERE e_hash='$log_email'");
-$sq = "SELECT start_date,date_date,postdate FROM experience_detail WHERE e_hash='$log_email'";
+else{
+	mysqli_query($db_connection, "UPDATE user_account SET avatartemp=NULL WHERE e_hash='$log_email'");
+}
+
+$sq = "SELECT start_date, date_date, postdate FROM experience_detail WHERE e_hash='$log_email'";
 $q = mysqli_query($db_connection, $sq);
-$date_year_diff = "";
-if($row = mysqli_fetch_assoc($q)>0){
-	while ($row = mysqli_fetch_array($q, MYSQLI_ASSOC)) {
-		$start_date = strftime("%b %Y", strtotime($row["start_date"]));
-		$date_date = strftime("%b %Y", strtotime($row["date_date"]));
-		$diff = abs(strtotime($date_date) - strtotime($start_date));
+$row1 = mysqli_num_rows($q);
+if($row1>0){
+	while ($row = mysqli_fetch_assoc($q)) {
+		$start_date = strtotime($row["start_date"]);
+		$date_date = strtotime($row["date_date"]);
+		$diff = abs($date_date - $start_date);					//abs(strtotime($date_date) - strtotime($start_date));
 		$date_year_diff = floor($diff / (365 * 60 * 60 * 24));
-		$jobapply = $row['postdate'];
+		$jobapply = strtotime($row['postdate']);
 	}
 }else{
 	$date_year_diff = 0;
+	$date_date = 0;
+	$jobapply=0;
 	}
-if($date_date-$jobapply>=1){
+if($date_date-$jobapply>=86400){
 	$query2 = mysqli_query($db_connection, "UPDATE experience_detail SET date_date=now(),date_year_diff= '$date_year_diff', is_current_job='1'  WHERE e_hash='$log_email'");
 }
 else{
