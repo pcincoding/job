@@ -555,6 +555,7 @@ function seeker1(email,pass,role){
 									'<span><img src="_img/owlphin_log.png" style="width:55px;" /></span>'+
 									'<h3>Tell us about your highest level of education</h3>'+	
 									'<span id="status4"></span>'+
+									
 								'</div>'+			  
 								'<div class="login-fields">'+
 								'<div class="field">'+
