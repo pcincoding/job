@@ -130,14 +130,14 @@ if(isset($_POST["email"])){
 	<div class="row">
 	  <div class="span6 third-section-span-1">
 		<div class="third-section-text" style="text-align:left;">
-		  <p class="third-section-text-md">The best way to find a professional</p><br/>
-		  <a href="javascript:void()" style="color: #fff;font-size: 1.4em;" onclick="login()">Sign in &nbsp;<span class="fa fa-arrow-left"></span></a>
+		  <p class="third-section-text-md">	<b><u>The best way to find a professional</b></u></p><br/>
+		  <a href="javascript:void()" style="color:red;font-size: 2em;" onclick="login()">Sign in &nbsp;<span class="fa fa-arrow-left"></span></a>
 		 </div>
 	  </div>
 	  <div class="span6 third-section-span-2">
 	    <div class="third-section-text" style="text-align:right;">
-		  <p class="third-section-text-md">Need a job? <br/> Tell us your story</p><br/>
-		  <a href="javascript:void()" style="color: #fff;font-size: 1.4em;" onclick="register()"><span class="fa fa-arrow-right"></span>&nbsp; Sign up</a>
+		  <p class="third-section-text-md"><b><u>Need a job? <br/> Tell us your story</b></u></p><br/>
+		  <a href="javascript:void()" style="color: red;font-size: 2em;" onclick="register()"><span class="fa fa-arrow-right"></span>&nbsp; Sign up</a>
 		</div>
 	  </div>
 	</div>
