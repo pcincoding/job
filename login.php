@@ -6,19 +6,18 @@ if ($user_ok == true) {
 }
 ?>
 <?php
-$msg = "";
 if (isset($_POST["email"])) {
 	$email = $_POST['email'];
-
 	$p = $_POST['p'];
 	$p_hash = md5($p);
 	$ip = "127.0.0.1";
-	$time = time() - 30;
+	$time = time() - 20;
 	$login_attempt = mysqli_query($db_connection, "select count(*) as total_count from tblcount where ip='$ip' and login_tme>'$time'");
 	$action = mysqli_fetch_assoc($login_attempt);
 	$count = $action['total_count'];
 	if ($count == 3) {
-		$msg = "Your account has been blocked. Please try again 30 seconds later";
+		$msg = "Your account has been blocked. Please try again 20 seconds later";
+		echo $_SESSION['msg'];
 	} else {
 
 		if ($email == "" || $p == "") {
@@ -47,18 +46,19 @@ if (isset($_POST["email"])) {
 				$count++;
 				$rem_attempt = 3 - $count;
 				if ($rem_attempt == 0) {
-					$msg = "Your account has been blocked. Please try again 30 seconds later";
+					$msg = "Your account has been blocked. Please try again 20 seconds later";
 				} else {
-					$msg = "Please Enter valid details. " . $rem_attempt . " attempts remaining";
+					$msg = $rem_attempt . " attempts remaining";
 				}
+				
 				$time = time();
 				$q = "insert into tblcount (ip,login_tme) values ('$ip','$time')";
 				$res = mysqli_query($db_connection, $q);
-				echo "login_failed";
+				$total = $msg . "|login_failed";
+				echo $total;
 			}
 		}
 	}
-
 	exit();
 }
 ?>
@@ -91,21 +91,18 @@ if (isset($_POST["email"])) {
 					<div class="field">
 						<i class="fa-solid fa-envelope"></i>
 						<input type="text" id="email" name="email" placeholder="Email" class="login email-field"
-							onfocus="emptyElement('status')" onkeyup="restrict('email')" />
+							 onkeyup="restrict('email')" />  <!--onfocus="emptyElement('status')" -->
 					</div>
 					<div class="field">
 						<i class="fa-solid fa-lock"></i>
 						<input type="password" id="password" name="password" placeholder="Password"
-							onfocus="emptyElement('status')" class="login password-field" />
+							 class="login password-field" /> 	 <!--onfocus="emptyElement('status')" -->
 						<i class="fa-solid fa-eye-slash" id="show-password"></i>
 					</div>
 				</div>
 				<div class="login-actions">
-					<button class="button btn btn-large" onclick="signin()">Sign In</button>
+					<button class="button btn btn-large" id="btnone" onclick="signin()">Sign In</button>
 				</div>
-				<span style="color: red;">
-					<?php echo $msg; ?>
-				</span>
 				<div class="login-extra" style="margin-bottom: 0;">
 					<a href="javascript:void(0)" onclick="resetpass()">Forgot password?</a>
 				</div>
@@ -154,6 +151,7 @@ if (isset($_POST["email"])) {
 			var email = _("email").value;
 			var p = _("password").value;
 			var status = _("status");
+			var msg = document.getElementById("msg");
 			var validmail = /^[a-zA-Z0-9._]{3,}@[a-z]{4,}[.]{1}[a-z.]{2,6}$/;
 			if (email == "") {
 				status.innerHTML = '<h5><div class="alert">Please fill out Email</div></h5>';
@@ -169,10 +167,36 @@ if (isset($_POST["email"])) {
 				var ajax = ajaxObj("POST", "login.php");
 				ajax.onreadystatechange = function () {
 					if (ajaxReturn(ajax) == true) {
-						alert(ajax.responseText);
-						if (ajax.responseText == "login_failed") {
-							status.innerHTML = '<h5><div class="alert">Wrong email or password</div></h5>';
+						var ustring = ajax.responseText.split("|||");
+						for(var i=0;i<ustring.length;i++){
+							var string = ustring[i].split("|");
+						}
+						var text1 = string[0];
+						var e = string[1];
+						if (e == "login_failed") {
+							if(text1 == "Your account has been blocked. Please try again 20 seconds later"){
+								var timer = 20;
+								var btnone = document.getElementById("btnone");
+								var counter = setInterval(setCountDown,1000);
+								btnone.style.display="none";
+								status.innerHTML = '<h5><div class="alert">Your account has been blocked. Please try again 20 seconds later</div></h5>';
+								function setCountDown(){
+									if(timer==0){
+									clearInterval(counter);
+									btnone.style.display="block";
+									status.innerHTML="";
+									}
+									else{
+									status.innerHTML = '<h5><div class="alert">Your account has been blocked. Please try again '+timer+' seconds later</div></h5>';
+									timer--;
+									}
+								}
+							}
+							else{
+								status.innerHTML = '<h5><div class="alert">Wrong email or password. '+text1+'</div></h5>';
+							}
 							_("showloader").style.display = "none";
+							
 						}
 						else {
 							location = "login.php";

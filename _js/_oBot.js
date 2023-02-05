@@ -48,10 +48,11 @@ function chatBot() {
 		if(this.input == 'noop')
 			return;
 		//return input + " what?";
-		return "...";
+		
 	}
 	this.match = function(regex) {
 	
 		return new RegExp(regex).test(this.input);
 	}
 }
+s

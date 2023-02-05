@@ -1640,10 +1640,11 @@ button.btn.btn-mini, input[type="submit"].btn.btn-mini {
 	padding: 8px 5px 8px 5px;
 	margin-bottom: 18px;
 	text-shadow: 0 1px 0 rgba(201, 54, 54, 0.5);
-	background-color: #0df00f8f;
+	background-color: #09eb09;
 	border: 1px solid #c9a258;
 	border-radius: 4px;
 	color: #d51111ed;
+	font-size: small;
 }
 .alert-heading {
 	color: inherit;
