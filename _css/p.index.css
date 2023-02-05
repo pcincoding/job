@@ -18,7 +18,7 @@
 .third-section-span-1{height: auto;text-align:center;}
 .third-section-span-2{height: auto;text-align:center;}
 .third-section-text{padding:20px;margin-top:50px;}
-.third-section-text-md{color: #0cb343;font-size: 3em;line-height: 40px;font-weight: 100;}
+.third-section-text-md{color: #7a0808;font-size: 3em;line-height: 40px;font-weight: 100;}
 .third-section-text-sm{color: #e3e3e3;font-size: 1.3em;line-height: 20px;font-weight: 100;}
 @media (max-width: 767px) {
 	.third-section{margin-left: -20px;margin-right: -20px;}
