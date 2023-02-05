@@ -136,7 +136,7 @@ if(isset($_POST["email"])){
 	  </div>
 	  <div class="span6 third-section-span-2">
 	    <div class="third-section-text" style="text-align:right;">
-		  <p class="third-section-text-md"><b>Need a job? <br/> Tell us your story</b></p><br/>
+		  <p class="third-section-text-md"><b><u>Need a job? <br/> Tell us your story</b></u></p><br/>
 		  <a href="javascript:void()" style="color: red;font-size: 2em;" onclick="register()"><span class="fa fa-arrow-right"></span>&nbsp; Sign up</a>
 		</div>
 	  </div>
