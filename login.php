@@ -16,7 +16,7 @@ if (isset($_POST["email"])) {
 	$action = mysqli_fetch_assoc($login_attempt);
 	$count = $action['total_count'];
 	if ($count == 3) {
-		$msg = "Your account has been blocked. Please try again 20 seconds later";
+		$msg = "Too many wrong attempts. Please try again 20 seconds later";
 		echo $_SESSION['msg'];
 	} else {
 
@@ -46,7 +46,7 @@ if (isset($_POST["email"])) {
 				$count++;
 				$rem_attempt = 3 - $count;
 				if ($rem_attempt == 0) {
-					$msg = "Your account has been blocked. Please try again 20 seconds later";
+					$msg = "Too many wrong attempts. Please try again 20 seconds later";
 				} else {
 					$msg = $rem_attempt . " attempts remaining";
 				}
@@ -174,12 +174,12 @@ if (isset($_POST["email"])) {
 						var text1 = string[0];
 						var e = string[1];
 						if (e == "login_failed") {
-							if(text1 == "Your account has been blocked. Please try again 20 seconds later"){
+							if(text1 == "Too many wrong attempts. Please try again 20 seconds later"){
 								var timer = 20;
 								var btnone = document.getElementById("btnone");
 								var counter = setInterval(setCountDown,1000);
 								btnone.style.display="none";
-								status.innerHTML = '<h5><div class="alert">Your account has been blocked. Please try again 20 seconds later</div></h5>';
+								status.innerHTML = '<h5><div class="alert">'+text1+'</div></h5>';
 								function setCountDown(){
 									if(timer==0){
 									clearInterval(counter);
@@ -187,7 +187,7 @@ if (isset($_POST["email"])) {
 									status.innerHTML="";
 									}
 									else{
-									status.innerHTML = '<h5><div class="alert">Your account has been blocked. Please try again '+timer+' seconds later</div></h5>';
+									status.innerHTML = '<h5><div class="alert">Too many wrong attempts. Please try again '+timer+' seconds later</div></h5>';
 									timer--;
 									}
 								}
