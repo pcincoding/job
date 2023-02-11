@@ -95,7 +95,7 @@ input,button,select,textarea {font-family: 'Source Sans Pro','Helvetica Neue',He
 .link-p-colr{color:#333;}
 
 .footer {margin-top: 0;}
-.footer-inner {padding: 15px 15px;font-size: 12px;background:linear-gradient(to left,rgb(211, 183, 25),rgb(129, 14, 6));color: #999;}
+.footer-inner {padding: 15px 15px;font-size: 12px;background-color: black;color: #999;}
 .footer a {color: #999;}
 .footer a:hover {color: #FFF;text-decoration: none;}
 

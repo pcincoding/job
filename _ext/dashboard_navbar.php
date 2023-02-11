@@ -5,7 +5,7 @@
 	    <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 	  </a>
 	  <a class="brand" href="./index.php">
-	    <img src="_img/owlphin_log.png" style="height:30px;" />
+	    <img src="_img/owl_sit.png" style="height:40px; width: 40px;" />
 		<span></span>
       </a>
       <div class="nav-collapse">
@@ -30,7 +30,7 @@
           </li>
         </ul>
         <form class="navbar-search mobile-no-show" style="margin-top: 6px;">
-          <input type="text" name="qu" id="qu" onKeyUp="fx(this.value)" onBlur="hideLive(this)" class="search-query" placeholder="Search people" style="width: 282px;">
+          <input type="text" name="qu" id="qu" onKeyUp="fx(this.value)" onBlur="hideLive(this)" class="search-query" placeholder="Search people" style="width: 282px; height: 20px;">
 		  <div id="livesearch"></div>
 		</form>
       </div>

@@ -3,5 +3,3 @@
 <div id="alertbox"><div><div id="alertboxbody"></div></div></div>
 <div id="successbox"><div><div id="successboxbody"></div></div></div>
 <div id="successlongbox"><div><div id="successlongboxbody"></div></div></div>
-
-

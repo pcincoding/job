@@ -103,7 +103,7 @@ mysqli_query($db_connection, "UPDATE seeker_profile SET profile_strength='$profi
 				<div class="text-center mobile-no-show" >
 				<form class="navbar-search text-center mobile-no-show" style="margin-top: 0px;margin-left: 35px;">
 				  <input type="text" name="qy" id="qy" onKeyUp="fy(this.value)" onBlur="hideLiveJobs(this)" class="span11 text-center" 
-				  style="background: linear-gradient(to right, pink, skyblue 25%, yellow 75%, pink 100%);font-size: 16px;border: 0px;" placeholder="Search job title or qualification or job type or keywords">
+				  style="background: linear-gradient(to right, pink, skyblue 20%, yellow 75%, pink 100%);font-size: 16px;border: 0px;" placeholder="Search job title or qualification or job type or keywords">
 				</form>
 				</div>
 				<div class="widget-content">
@@ -148,6 +148,7 @@ function fy(str){
 	  }else{xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");}
 	xmlhttp.onreadystatechange=function(){
 	  if (xmlhttp.readyState==4 && xmlhttp.status==200){
+		alert(xmlhttp.responseText);
 		document.getElementById("joblivesearch").innerHTML=xmlhttp.responseText;
 		document.getElementById("joblivesearch").style.display="block";
 		$("#joblogs").hide(500);

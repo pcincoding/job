@@ -59,16 +59,16 @@ if(isset($_POST["email"])){
 	    <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 	  </a>
 	  <a class="brand" href="">
-	    <img src="_img/owlphin_log.png" style="height:30px;" />
+	    <img src="_img/owlphin_gif.gif" style="height:30px" />
 		<span></span>
       </a>
       <div class="nav-collapse index">
 		<form class="navbar-search strict-mobile-no-show"  role="form" method="post" onSubmit="return false;">
           <input type="text" class="search-query" placeholder="Email" id="email" name="email" onkeyup="restrict('email')" /> 
 		  <input type="password" class="search-query" placeholder="Password" id="password" name="password" onkeyup="restrict('password')"/>
-		   <span id="signinbtn"><button id="loginbtn" class="btn btn-primary" onclick="signin()" disabled>Sign in</button></span>&nbsp;
-		   <button id="registerbtn" class="btn btn-inverse" onclick="register()">No account? Join Now</button>
-		   <button id="registerbtn" class="btn btn-primary" onclick="help()"><span class="fa fa-info"></span> Learn more</button>
+		   <span id="signinbtn"><button id="loginbtn" class="btn btn-success" onclick="signin()" disabled>Sign in</button></span>&nbsp;
+		   <button id="registerbtn" class="btn btn-success" onclick="register()">No account? Join Now</button>
+		   <button id="registerbtn" class="btn btn-info" onclick="help()"><span class="fa fa-info"></span> Learn more</button>
         </form>
       </div>
     </div>
@@ -82,10 +82,6 @@ if(isset($_POST["email"])){
 		<div class="banner-text">
 		  <p class="banner-text-md">Welcome to the TalentTaps</p>
 		  <p class="banner-text-lg" style="font-size: 3.4em;line-height: 40px;">This is a job recruitment portal that speeds-up the current employee recruitment process using Artificial Intelligence.</p>
-		  <p class="banner-text-md">
-			<a href="javascript:void(0)" onclick="help()" style="color: #d2d2d2;">Click here to learn more</a> or 
-			<a href="javascript:void(0)" onclick="register()" style="color: #d2d2d2;">Signup</a>
-		  </p>
 		</div>
 	  </div>
     </div>
@@ -96,28 +92,28 @@ if(isset($_POST["email"])){
 	<div class="row">
 	  <div class="span3 second-section-span">
 	    <div class="second-section-text">
-		   	<p><span class="fa fa-search fa-4x" style="color: gray;"></span></p>
+		   	<p><span class="fa fa-search fa-4x" style="color: brown;"></span></p>
 			<p><b>Quick Job Search</b></p>
 			<p>Let's give you a faster way of find the career you desire. Gain full control of your interests.</p>
 		 </div>
 	  </div>
 	  <div class="span3 second-section-span">
 	     <div class="second-section-text">
-		   	<p><span class="fa fa-binoculars fa-4x" style="color: gray;"></span></p>
+		   	<p><span class="fa fa-binoculars fa-4x" style="color: brown;"></span></p>
 			<p><b>Candidate Discovery</b></p>
 			<p>We use AI to scour your existing applicant pool for top candidates.</p>
 		 </div>
 	  </div>
 	  <div class="span3 second-section-span">
 	     <div class="second-section-text">
-		   	<p><span class="fa fa-file-text fa-4x" style="color: gray;"></span></p>
+		   	<p><span class="fa fa-file-text fa-4x" style="color: brown;"></span></p>
 			<p><b>Candidate Screening</b></p>
 			<p>We screen candidates automatically, in real-time, with incredible accuracy. Put screening on cruise control.</p>
 		 </div>
 	  </div>
 	  <div class="span3 second-section-span">
 	    <div class="second-section-text">
-		   	<p><span class="fa fa-comment fa-4x" style="color: gray;"></span></p>
+		   	<p><span class="fa fa-comment fa-4x" style="color: brown;"></span></p>
 			<p><b>Recruiter Chatbot</b></p>
 			<p>Engage with candidates at scale, 24/7! Drastically increase response rates and eliminate initial screening calls.</p>
 		 </div>
@@ -131,13 +127,13 @@ if(isset($_POST["email"])){
 	  <div class="span6 third-section-span-1">
 		<div class="third-section-text" style="text-align:left;">
 		  <p class="third-section-text-md">	<b><u>The best way to find a professional</b></u></p><br/>
-		  <a href="javascript:void()" style="color:red;font-size: 2em;" onclick="login()">Sign in &nbsp;<span class="fa fa-arrow-left"></span></a>
+		  <a href="javascript:void()" style="color: white; font-size: 2em;" onclick="login()">Sign in &nbsp;<span class="fa fa-arrow-left"></span></a>
 		 </div>
 	  </div>
 	  <div class="span6 third-section-span-2">
 	    <div class="third-section-text" style="text-align:right;">
 		  <p class="third-section-text-md"><b><u>Need a job? <br/> Tell us your story</b></u></p><br/>
-		  <a href="javascript:void()" style="color: red;font-size: 2em;" onclick="register()"><span class="fa fa-arrow-right"></span>&nbsp; Sign up</a>
+		  <a href="javascript:void()" style="color: white; font-size: 2em;" onclick="register()"><span class="fa fa-arrow-right"></span>&nbsp; Sign up</a>
 		</div>
 	  </div>
 	</div>

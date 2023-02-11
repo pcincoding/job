@@ -55,4 +55,3 @@ function chatBot() {
 		return new RegExp(regex).test(this.input);
 	}
 }
-s

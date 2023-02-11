@@ -13,7 +13,7 @@
 	<div class="navbar-inner owl-gradient">
 		<div class="container"> 
 		  <a class="brand"  href="javascript:void(0)" onclick="owlphinhome()">
-			<h2 class="title"><img src="_img/owlphin_gif.gif" style="height:30px;" /></h2>
+			<h2 class="title"><img src="_img/owl_jump.gif" style="height:30px;" /></h2>
 		  </a>
 		</div>
 	</div> 

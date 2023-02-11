@@ -725,7 +725,7 @@ function seeker3(email,pass,role,f,l,g,dob,major,degree,cgpa,fr,to,uni){
 												  '<div class="login-fields text-center">'+
 													'<label class="text-center" for="code1">Activation string:</label>'+
 													'<div class="field-flex">'+
-													  '<input type="text" id="code1" name="code1" placeholder="" onfocus="emptyElement(\'status7\')" />'+
+													  '<input type="text" id="code1" name="code1" onfocus="emptyElement(\'status7\')" />'+
 													'</div>'+
 													'<div class="login-actions">'+	
 													 ' <button class="button btn btn-inverse btn-large" onclick="activate1(\''+email+'\',\''+pass+'\')">Finish</button>'+

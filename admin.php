@@ -209,7 +209,7 @@ $sql2 = "SELECT * FROM feedback WHERE xp='b'";$bquery = mysqli_query($db_connect
 								<h3>System Performance</h3>
 							</div>
 							<div class="widget-content">
-								<div class="spinner" style="background-color: #000;">Its good condition</div>
+								<div class="spinner" style="background-color: #000;"></div>
 							</div>
 						</div>
 					</div>
@@ -317,7 +317,11 @@ $sql2 = "SELECT * FROM feedback WHERE xp='b'";$bquery = mysqli_query($db_connect
 			{ value: a, color: "#46BFBD" },
 			{ value: g, color: "#066c24 " }
 		];
-		var myDoughnut = new Chart(document.getElementById("donut-chart").getContext("2d")).Doughnut(doughnutData);
+		var donutchart = document.getElementById("donut-chart");
+		var donutContext = donutchart.getContext("2d");
+		donutContext.fillStyle = "black";
+		donutContext.fillRect(30,30,10,10);
+		var myDoughnut = new Chart(donutContext).Doughnut(doughnutData);		
 	</script>
 </body>
 

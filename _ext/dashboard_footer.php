@@ -14,7 +14,7 @@
   <div class="mouth-mini"></div>
   </div>
   <div class="owl-standby owlstandby-mobile-no-display">
-	<span class="hand"><img src="_img/owlphin_gif.gif" style="height:25px;" />&nbsp;&nbsp; <span id="owl-text" style="font-size:14px;">How can I help?</span></span>
+	<span class="hand"><img src="_img/owl_jump.gif" style="height:30px; width:35px; border-radius:50%;" />&nbsp;&nbsp; <span id="owl-text" style="font-size:14px;">How can I help?</span></span>
   </div>
 </div>
 

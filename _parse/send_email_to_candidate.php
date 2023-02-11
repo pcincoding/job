@@ -1,5 +1,6 @@
 <?php
 include_once("../_sys/check_login_status.php");
+include_once("../phpmailer.php");
 if($user_ok != true || $log_email == "") {
 	exit();
 }
@@ -15,25 +16,21 @@ if(isset($_POST['jobid']) && isset($_POST['userhash'])){
 	$email_text = html_entity_decode($emailtext);
 	
 	$mysql = "SELECT email FROM user_account WHERE e_hash='$userhash' LIMIT 1";
+	$mysql1 = "select company_name from company_profile where e_hash='$log_email'";
 	$_query = mysqli_query($db_connection, $mysql);
+	$query1 = mysqli_query($db_connection, $mysql1);
 	while ($row = mysqli_fetch_array($_query, MYSQLI_ASSOC)) {
 		$email = $row["email"];
 	}
-	$to = "$email";							 
-	$from = "bacsyd-noreply@bacsyd.com";
-	$subject = 'Bacsyd Candidate Acceptance Letter';
-	$message = '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>';
-	$message .= '<p style="padding:10px;background-color: rgb(217, 226, 245);">'.$email_text.'</p>';
+	while($row1 = mysqli_fetch_assoc($query1)){
+		$comapany_name = $row1["company_name"];
+	}
+	$customMailer = new CustomMailer();
+    $subject = $comapany_name." Candidate Acceptance Letter";
+    $message = '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>';
+    $message .= '<p style="padding:10px;background-color: rgb(217, 226, 245);">'.$email_text.'</p>';
 	$message .= '</body></html>';
-	$headers = "From: bacsyd-noreply@bacsyd.com\r\n";
-	$headers .= "Reply-To: bacsyd-noreply@bacsyd.com\r\n";
-	$headers .= "Return-Path: bacsyd-noreply@bacsyd.com\r\n";
-	$headers .= "CC: bacsyd-noreply@bacsyd.com\r\n";
-	$headers .= "BCC: bacsyd-noreply@bacsyd.com\r\n";
-	$headers .= "MIME-Version: 1.0\n";
-	$headers .= "Content-type: text/html; charset=iso-8859-1\n";
-	mail($to, $subject, $message, $headers);	
-	
+	$customMailer->sendMail($email, $subject, $message);			
 	echo "email_sent";	
 }
 ?>
