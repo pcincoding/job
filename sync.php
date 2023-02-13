@@ -104,7 +104,7 @@ if($utype == "seeker"){
 <?php include_once("_ext/default_head.php");?>
 <link href="_css/p.dashboard.css" rel="stylesheet">
 </head>
-<body style="background-color: cadetblue">
+<body style="background-color: #b05fd1">
 <?php include_once("_ext/pageloader.php");?>
 <?php include_once("_ext/pageloader-starter.php");?>
 <?php include_once("_ext/dashboard_navbar.php");?>

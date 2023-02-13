@@ -148,7 +148,6 @@ function fy(str){
 	  }else{xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");}
 	xmlhttp.onreadystatechange=function(){
 	  if (xmlhttp.readyState==4 && xmlhttp.status==200){
-		alert(xmlhttp.responseText);
 		document.getElementById("joblivesearch").innerHTML=xmlhttp.responseText;
 		document.getElementById("joblivesearch").style.display="block";
 		$("#joblogs").hide(500);

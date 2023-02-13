@@ -31,13 +31,14 @@ if($notes_numrows < 1){
 		$sql_ = "SELECT shortlist_limit FROM job_post WHERE id='$job_post_id'";
 		$query_ = mysqli_query($db_connection, $sql_);
 		$row_ = mysqli_fetch_row($query_);
-		if($row>0){
-			$shortlist_limit=$row[0];
+		$row = mysqli_num_rows($query_);
+		if(isset($row) && $row>0){
+			$shortlist_limit=$row_[0];
 		} else {
 			$shortlist_limit = 0;
 		}
 		
-		$limit_num = ($shortlist_limit/100)*$total_num_of_applys;
+		$limit_num = floor(($shortlist_limit/100)*$total_num_of_applys);
 		
 		if($note_type == "a"){
 			$notification_list .= '<div id="delete_'.$noteid.'" class="profile_widget" style="margin: 5px .9% 10px;"><div class="profile_widget-image" style="vertical-align: top;"><img src="_img/owlphin_gif.gif" style="width: 50px;height: auto;" alt="Owlphin"></div>';
@@ -47,7 +48,7 @@ if($notes_numrows < 1){
 			$notification_list .= '<br /> Emial: <a href="mailto:mtckobby@gmail.com">talentaps-noreply@talentaps.com</a></h4></div></div>';
 		}else if($note_type == "r"){
 			$notification_list .= '<div id="delete_'.$noteid.'" class="profile_widget" style="margin: 5px .9% 10px;">'.$noteDeleteButton.'';
-			$notification_list .= '<div class="profile_widget-image" style="vertical-align: top;"><span style="font-size: 4em;color: #a2a2a2;" class="fa fa-briefcase"></div>';
+			$notification_list .= '<div class="profile_widget-image" style="vertical-align: top;"><span style="font-size: 3.5em; color: #cf4b18;" class="fa fa-briefcase"></div>';
 			$notification_list .= '<div class="profile_widget-details"><h4><span class="grey-out">Job ID:</span> <a href="javascript:void()" style="font-weight:bold;" onclick="OpenJobDetails(\''.$job_post_id.'\',\'delete_'.$noteid.'\');"> mtc_01'.$job_post_id.'_fbr</a></h4>';
 			$notification_list .= '<h4 style="margin-top: 5px;"><span class="grey-out">Number of candidates shortlisted:</span> '.$limit_num.' / '.$total_num_of_applys.'</h4>';
 			$notification_list .= '<h4 style="margin-top: 5px;"> <button class="btn btn-small" onclick="OpenApplicants(\''.$job_post_id.'\');"><span class="fa fa-file"></span> View results</button></h4>';

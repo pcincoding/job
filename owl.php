@@ -22,7 +22,7 @@
 	<div class="chat"></div>
 	<div class="busy"></div>
 	<div class="input has-feedback">
-		<div class="input-append">
+		<div class="input-append"  style="background-color:skyblue;">
           <input class="span2 m-wrap" id="appendedInputButton" placeholder="Start typing.." type="text">
           <a class="btn" style="margin-left: 2px;"><span class="fa fa-send"></span></a>
         </div>     	

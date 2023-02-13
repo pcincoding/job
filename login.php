@@ -70,7 +70,7 @@ if (isset($_POST["email"])) {
 	<title>Sign in to TalentTaps</title>
 	<?php include_once("_ext/default_head.php"); ?>
 	<link href="_css/p.login-register-reset.css" rel="stylesheet">
-	<link rel="stylesheet" href="Font/css/all.css">
+	<link rel="stylesheet" href="_css/_fa.css">
 </head>
 
 <body class="login-background">
@@ -89,15 +89,15 @@ if (isset($_POST["email"])) {
 				</div>
 				<div class="login-fields">
 					<div class="field">
-						<i class="fa-solid fa-envelope"></i>
+						<i class="fa fa-envelope"></i>
 						<input type="text" id="email" name="email" placeholder="Email" class="login email-field"
 							 onkeyup="restrict('email')" />  <!--onfocus="emptyElement('status')" -->
 					</div>
 					<div class="field">
-						<i class="fa-solid fa-lock"></i>
+						<i class="fa fa-lock"></i>
 						<input type="password" id="password" name="password" placeholder="Password"
 							 class="login password-field" /> 	 <!--onfocus="emptyElement('status')" -->
-						<i class="fa-solid fa-eye-slash" id="show-password"></i>
+						<i class="fa fa-eye-slash" id="show-password"></i>
 					</div>
 				</div>
 				<div class="login-actions">

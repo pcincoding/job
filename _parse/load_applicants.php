@@ -10,7 +10,8 @@ if (isset($_GET['jid'])){
 	exit();
 }
 ?><?php
-$view_applicants = "";$counter = 1;
+$view_applicants = "";
+$counter = 1;
 
 $sql1 = "SELECT id FROM job_post_activity WHERE job_post_id='$jid'";
 $query1 = mysqli_query($db_connection, $sql1);

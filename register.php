@@ -245,7 +245,7 @@ if(isset($_POST['action']) && $_POST['action'] == "activate_account"){
 <title>Join Owlphin now</title>
 <?php include_once("_ext/default_head.php");?>
 <link href="_css/p.login-register-reset.css" rel="stylesheet">
-<link rel="stylesheet" href="Font/css/all.css">
+<link rel="stylesheet" href="_css/_fa.css">
 </head>
 <body class="register-background">
 <?php include_once("_ext/pageloader.php");?>
@@ -263,18 +263,18 @@ if(isset($_POST['action']) && $_POST['action'] == "activate_account"){
 		  </div>		
 		  <div class="login-fields">
 			<div class="field" style="margin-bottom: 0em;">
-			<i class="fa-solid fa-envelope"></i>
+			<i class="fa fa-envelope"></i>
 			  <input type="text" id="email" name="email" placeholder="Email address" onblur="emailValidation()" onkeyup="restrict('email')" onfocus="emptyElement('status1')" />
 			</div>
 			<div class="field">
-			<i class="fa-solid fa-lock"></i>
+			<i class="fa fa-lock"></i>
 			  <input type="password" id="pass1" name="pass1" placeholder="Password" onfocus="emptyElement('status1')" maxlength="40" onpaste="return false" />
-			  <i class="fa-solid fa-eye-slash" id="show1"></i>
+			  <i class="fa fa-eye-slash" id="show1"></i>
 			</div>
 			<div class="field">
-			<i class="fa-solid fa-lock"></i>
+			<i class="fa fa-lock"></i>
 			  <input type="password" id="pass2" name="pass2" placeholder="Confirm Password" onfocus="emptyElement('status1')" maxlength="40" onpaste="return false" />
-			  <i class="fa-solid fa-eye-slash" id="show2"></i>
+			  <i class="fa fa-eye-slash" id="show2"></i>
 			</div>	
 			<div class="login-actions">	
 			  <button style="margin:10px 0" class="button btn btn-large" onclick="nextone()">Join now</button>
