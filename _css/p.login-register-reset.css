@@ -1,6 +1,6 @@
 .hand{cursor:pointer;}
 .login-background{background: url(../_img/img8.png) no-repeat;background-position: center;background-size: cover;background-attachment:fixed;}
-.register-background{background: url(../_img/img8.png) no-repeat;background-position: center;background-size: cover;background-attachment:fixed;}
+.register-background{background: url(../_img/img7.png) no-repeat;background-position: center;background-size: cover;background-attachment:fixed;}
 .reset-background{background: url(../_img/img7.png) no-repeat;background-position: center;background-size: cover;background-attachment:fixed;}
 @media(max-width:768px){
 	.login-background{background-color: black;background-position: inherit;background-size: inherit;background-attachment:fixed;}
