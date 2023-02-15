@@ -1,10 +1,10 @@
 <?php
-session_start();
 include_once("db_connection.php");
 $user_ok = false;
 $log_id = "";
 $log_email = "";
 $log_password = "";
+session_start();
 
 function evalLoggedUser($db_connection,$id,$e,$p){
 	$sql = "SELECT * FROM user_account WHERE id='$id' AND e_hash='$e' AND password='$p'";

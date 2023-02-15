@@ -394,7 +394,6 @@ function nextone(){
 					_("showloader1").style.display = "none";
 					status1.innerHTML = '<h5><div class="alert">'+ajax.responseText+'</div></h5>';
 				} else {
-					//_("hideloginbtn").innerHTML = '<ul class="nav pull-right"><li><button class="btn btn-inverse" onclick="register()">Cancel</button></li></ul>';
 					window.scrollTo(0,0);	
 					_("registerform").innerHTML = '	<div class="account-container register">'+
 												'<div id="showloader2" class="div-loader-cover"><div class="spinner"></div></div>'+
@@ -709,8 +708,8 @@ function seeker3(email,pass,role,f,l,g,dob,major,degree,cgpa,fr,to,uni){
 		var ajax = ajaxObj("POST", "register.php");
         ajax.onreadystatechange = function() {
 	        if(ajaxReturn(ajax) == true) {
+				alert(ajax.responseText);
 				if(ajax.responseText == "seeker_success"){
-					_("hideloginbtn").innerHTML = '';
 					window.scrollTo(0,0);	
 					_("registerform").innerHTML = '<div class="account-container register">'+
 											  '<div id="seekerloader5" class="div-loader-cover"><div class="spinner"></div></div>'+
@@ -735,6 +734,7 @@ function seeker3(email,pass,role,f,l,g,dob,major,degree,cgpa,fr,to,uni){
 													'</div>'+
 												 ' </div></form></div></div>';	
 				} else {
+					alert("hello2");
 					status5.innerHTML = '<h5><div class="alert">'+ajax.responseText+'</div></h5>';
 				}
 	        }

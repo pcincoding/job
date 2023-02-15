@@ -40,26 +40,20 @@ if($notes_numrows < 1){
 		
 		$limit_num = floor(($shortlist_limit/100)*$total_num_of_applys);
 		
-		if($note_type == "a"){
-			$notification_list .= '<div id="delete_'.$noteid.'" class="profile_widget" style="margin: 5px .9% 10px;"><div class="profile_widget-image" style="vertical-align: top;"><img src="_img/owlphin_gif.gif" style="width: 50px;height: auto;" alt="Owlphin"></div>';
-			$notification_list .= '<div class="profile_widget-details"><h4><span class="grey-out" style="color: #606060;font-size: 12px;">'.$note.'';
-			$notification_list .= '<br /><br /><span class="fa fa-lightbulb-o"></span> Tip';
-			$notification_list .= '<br /> If you encounter any problems, or need help with our system, please contact our Support Team.<br /> Tel: <a href="tel://+233549112267">0549112267</a> ';
-			$notification_list .= '<br /> Emial: <a href="mailto:mtckobby@gmail.com">talentaps-noreply@talentaps.com</a></h4></div></div>';
-		}else if($note_type == "r"){
+		if($note_type == "r"){
 			$notification_list .= '<div id="delete_'.$noteid.'" class="profile_widget" style="margin: 5px .9% 10px;">'.$noteDeleteButton.'';
 			$notification_list .= '<div class="profile_widget-image" style="vertical-align: top;"><span style="font-size: 3.5em; color: #cf4b18;" class="fa fa-briefcase"></div>';
 			$notification_list .= '<div class="profile_widget-details"><h4><span class="grey-out">Job ID:</span> <a href="javascript:void()" style="font-weight:bold;" onclick="OpenJobDetails(\''.$job_post_id.'\',\'delete_'.$noteid.'\');"> mtc_01'.$job_post_id.'_fbr</a></h4>';
 			$notification_list .= '<h4 style="margin-top: 5px;"><span class="grey-out">Number of candidates shortlisted:</span> '.$limit_num.' / '.$total_num_of_applys.'</h4>';
 			$notification_list .= '<h4 style="margin-top: 5px;"> <button class="btn btn-small" onclick="OpenApplicants(\''.$job_post_id.'\');"><span class="fa fa-file"></span> View results</button></h4>';
-			$notification_list .= '</div></div>';
+			$notification_list .= '<br><br>'.$note.'</div></div>';
 		}else if($note_type == "s"){
 			$notification_list .= '<div id="delete_'.$noteid.'" class="profile_widget" style="margin: 5px .9% 10px;">'.$noteDeleteButton.'';
 			$notification_list .= '<div class="profile_widget-image" style="vertical-align: top;"><span style="font-size: 4em;color: #a2a2a2;" class="fa fa-briefcase"></div>';
 			$notification_list .= '<div class="profile_widget-details"><h4><span class="grey-out">Job ID:</span> <a href="javascript:void()" style="font-weight:bold;" onclick="OpenJobDetails(\''.$job_post_id.'\',\'delete_'.$noteid.'\');"> mtc_01'.$job_post_id.'_fbr</a></h4>';
 			$notification_list .= '<h4 style="margin-top: 5px;"><span class="grey-out">Number of applicants:</span> '.$total_num_of_applys.'</h4>';
 			$notification_list .= '<h4 style="margin-top: 5px;"><span class="grey-out">Best candidates shortlisted:</span> 1</h4>';
-			$notification_list .= ''.$note.'</div></div>';
+			$notification_list .= '<br><br>'.$note.'</div></div>';
 		}
 	}
 }

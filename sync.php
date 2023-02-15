@@ -15,16 +15,19 @@ $sql3 = "SELECT id FROM job_post WHERE company_id='$log_email'";
 $query3 = mysqli_query($db_connection, $sql3);
 $jobposts_num = mysqli_num_rows($query3);
 ?><?php 
-$profile_stregth = 0;
+$seeker_profile_stregth = 0;
+$skill_match = 0;
+$degree_match = 0;
+$industry_xp = 0;
 $sql_dp = "SELECT * FROM user_account WHERE e_hash='$log_email'";
 $query_dp = mysqli_query($db_connection, $sql_dp);
 while ($row = mysqli_fetch_array($query_dp, MYSQLI_ASSOC)) {
 	$ps_avatar = $row["user_image"];
 }
 if($ps_avatar == NULL){
-	$profile_stregth = $profile_stregth + 0;
+	$seeker_profile_stregth = $seeker_profile_stregth + 0;
 }else{
-	$profile_stregth = $profile_stregth + 3;
+	$seeker_profile_stregth = $seeker_profile_stregth + 3;
 }
 $ps_seeker_bio = "";
 $sql_bio = "SELECT * FROM seeker_profile WHERE e_hash='$log_email'";
@@ -32,33 +35,36 @@ $query_bio = mysqli_query($db_connection, $sql_bio);
 while ($row = mysqli_fetch_array($query_bio, MYSQLI_ASSOC)) {
 	$ps_seeker_bio = $row["seeker_bio"];
 }
-if($ps_seeker_bio == " "){
-	$profile_stregth = $profile_stregth + 0;
-}else if($ps_seeker_bio != " " && (strlen($ps_seeker_bio)) < 39 ){
-	$profile_stregth = $profile_stregth + 4;
+if($ps_seeker_bio == ""){
+	$seeker_profile_stregth = $seeker_profile_stregth + 0;
+}else if($ps_seeker_bio != "" && (strlen($ps_seeker_bio)) < 39 ){
+	$seeker_profile_stregth = $seeker_profile_stregth + 4;
 }else{
-	$profile_stregth = $profile_stregth + 10;
+	$seeker_profile_stregth = $seeker_profile_stregth + 10;
 }
 $sql_edu = "SELECT id FROM education_detail WHERE e_hash='$log_email'";
 $query_edu = mysqli_query($db_connection, $sql_edu);
 $ps_edu_num = mysqli_num_rows($query_edu);
 if($query_edu == true){
-	$profile_stregth = $profile_stregth + ($ps_edu_num * 4);
+	$degree_match = $degree_match + ($ps_edu_num * 4);
 }
 $sql_xp = "SELECT id FROM experience_detail WHERE e_hash='$log_email'";
-$query_xp = mysqli_query($db_connection, $sql_xp);$ps_xp_num = mysqli_num_rows($query_xp);
+$query_xp = mysqli_query($db_connection, $sql_xp);
+$ps_xp_num = mysqli_num_rows($query_xp);
 if($query_xp == true){
-	$profile_stregth = $profile_stregth + ($ps_xp_num * 5);
+	$industry_xp = $industry_xp + ($ps_xp_num * 5);
 }
 $sql_skill = "SELECT id FROM seeker_skill_set WHERE e_hash='$log_email'";
 $query_skill = mysqli_query($db_connection, $sql_skill);
 $ps_skill_num = mysqli_num_rows($query_skill);
 if($query_skill == true && $ps_skill_num < 7){
-	$profile_stregth = $profile_stregth + ($ps_skill_num * 3);
+	$skill_match = $skill_match + ($ps_skill_num * 3);
 }else if($ps_skill_num > 7){
-	$profile_stregth = $profile_stregth + 18;
+	$skill_match = $skill_match + 18;
 }
-mysqli_query($db_connection, "UPDATE seeker_profile SET profile_strength='$profile_stregth' WHERE e_hash='$log_email'");
+$seeker_result = $seeker_profile_stregth + $skill_match + $degree_match + $industry_xp;
+mysqli_query($db_connection, "UPDATE seeker_profile SET profile_strength='$seeker_result' WHERE e_hash='$log_email'");
+mysqli_query($db_connection,"UPDATE job_post_activity SET seeker_result='$seeker_result', seeker_profile_strength='$seeker_profile_stregth', skill_match='$skill_match', degree_match='$degree_match', industry_xp = '$industry_xp'  WHERE e_hash='$log_email'");
 ?><?php 
 include_once("_ext/dashboard_ulog.php");
 if($e != $log_email){
@@ -70,8 +76,7 @@ if($utype == "seeker"){
 	$stats .= '<div class="big_stats cf">';
     $stats .= '<div class="stat"><span class="value">'.$seeker_num.'</span> <p style="margin: 6px 0 9px;">Job seekers</p></div>';
     $stats .= '<div class="stat"><span class="value">'.$company_num.'</span> <p style="margin: 6px 0 9px;">Employers</p></div> ';
-//$stats .= '<div class="stat"><span class="value">'.$jobs_num.'</span> <p style="margin: 6px 0 9px;">Job posts</p></div>';
-    $stats .= '<div class="stat"><span class="value">'.$profile_stregth.'%</span> <p style="margin: 6px 0 9px;">Profile strength</p></div>';
+    $stats .= '<div class="stat"><span class="value">'.$seeker_result.'%</span> <p style="margin: 6px 0 9px;">Profile strength</p></div>';
     $stats .= '</div>';
 	$shortcut .= '<a href="javascript:void(0);" onclick="bookmarks(\''.$log_email.'\')" class="shortcut">';
 	$shortcut .= '<i class="shortcut-icon fa fa-bookmark"></i>';

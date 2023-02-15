@@ -5,7 +5,9 @@ if($user_ok != true || $log_email == "") {
 }
 ?><?php
 mysqli_query($db_connection, "UPDATE job_post SET is_active='1' WHERE deadline_date < NOW()");
-$job_shortlist_note = "";$rej_note = "";$acpt_note = "";
+$job_shortlist_note = "";
+$rej_note = "";
+$acpt_note = "";
 $sql = "SELECT * FROM job_post WHERE is_active='1'";
 $queryx = mysqli_query($db_connection, $sql);
 while ($row = mysqli_fetch_array($queryx, MYSQLI_ASSOC)) {
@@ -21,7 +23,7 @@ while ($row = mysqli_fetch_array($queryx, MYSQLI_ASSOC)) {
 	$qualification = $row["qualification"];
 	$is_active = $row["is_active"];
 	
-	$j_sql = "SELECT * FROM notifications WHERE job_post_id='$job_id'";
+	$j_sql = "SELECT * FROM job_post_activity WHERE job_post_id='$job_id' ORDER BY seeker_result DESC LIMIT $limit_num";
 	$j_query = mysqli_query($db_connection, $j_sql);
 	$numrows = mysqli_num_rows($j_query);
 	if($numrows < 1){
@@ -40,6 +42,7 @@ while ($row = mysqli_fetch_array($queryx, MYSQLI_ASSOC)) {
 			$sql0 = "INSERT INTO notifications (note_type , e_hash, initiator_hash, job_post_id, note, date_time) VALUES ('s','$e_hash','$company_id','$job_post_id','$rej_note',now())";
 			$query0 = mysqli_query($db_connection, $sql0);
 		}
+	}else{
 		$sql2 = "SELECT e_hash,job_post_id FROM job_post_activity WHERE job_post_id='$job_id' ORDER BY seeker_result DESC LIMIT 1";
 		$query2 = mysqli_query($db_connection, $sql2);
 		$numrows2 = mysqli_num_rows($query2);
@@ -52,6 +55,7 @@ while ($row = mysqli_fetch_array($queryx, MYSQLI_ASSOC)) {
 			$query3 = mysqli_query($db_connection, $sql3);
 		}
 	}
+	
 }
 echo $job_shortlist_note;
 ?>
