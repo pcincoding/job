@@ -9,7 +9,7 @@ if ($user_ok == true) {
 if (isset($_POST["email"])) {
 	$email = $_POST['email'];
 	$p = $_POST['p'];
-	$p_hash = md5($p);
+	$p_hash = md5($p); //this is encryption
 	$ip = "127.0.0.1";
 	$time = time() - 20;
 	$login_attempt = mysqli_query($db_connection, "select count(*) as total_count from tblcount where ip='$ip' and login_tme>'$time'");
@@ -23,7 +23,7 @@ if (isset($_POST["email"])) {
 		if ($email == "" || $p == "") {
 			echo "Please Enter Email and Password";
 		} else {
-			$sql = "SELECT id, email,e_hash, password FROM user_account WHERE email ='$email' AND password='$p_hash' AND activated='1' LIMIT 1";
+			$sql = "SELECT id, email,e_hash, password FROM user_account WHERE email ='$email' AND password='$p_hash' AND activated='1' LIMIT 1"; //this is decryption
 			$query = mysqli_query($db_connection, $sql);
 			$rownum = mysqli_num_rows($query);
 			if ($rownum > 0) {
